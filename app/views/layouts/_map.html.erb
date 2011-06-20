@@ -1,0 +1,56 @@
+<% @body_onload = "initialize();" %>
+
+<script type="text/javascript">
+  function initialize() {
+    var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var myOptions = {
+      zoom: 8,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas"),
+        myOptions);
+
+//delete this comment later, pasting from swarm, update variables, etc, accordingly
+
+    //create empty infowindow outside of loop
+    infowindow = new google.maps.InfoWindow();
+    //put location markers on map
+    <% @places.each do |place| %>
+      // don't show the marker if we don't have a lat lng or if a bid has already been accepted
+      <% if place.geocoded? %>
+         
+          
+            var request_latlng = new google.maps.LatLng(<%= place.lat %>, <%= place.lng %>);       
+
+            var marker = new google.maps.Marker({ 
+              position: request_latlng, 
+              map: map, 
+              title: "Not sure what to do for title of places yet"
+            });
+            
+            var contentString = 'Not sure what to put in the infobubble yet either.';
+           
+
+             addContentToWindow(marker, contentString);
+      
+     
+     
+        
+        <% end %>
+    <% end %>  
+      
+       function addContentToWindow(marker, contentString){
+         google.maps.event.addListener(marker, 'click', function() {
+         infowindow.setContent(contentString);
+         infowindow.open(map, marker);
+         });
+       }
+  }
+
+
+
+
+</script>
+<div id="map_canvas" class="map"></div>
+

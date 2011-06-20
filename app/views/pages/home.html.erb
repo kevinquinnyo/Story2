@@ -1,0 +1,25 @@
+
+
+
+<% content_for :header do %>
+  <h1>Insert cool logo here</h1>
+<% end %>
+
+<% content_for :top do %>
+  <%= render 'layouts/map' %>
+<% end %>
+
+<% content_for :left do %>
+  <h1>A list of stories goes here, in order of user votes</h1>
+
+  <% @stories.each do |story| %>    
+    <%= link_to story.title %></br>
+  <% end %>
+  
+<% end %>
+
+<% content_for :right do %>
+  <h1>If you select a story, you read it here.</h1>
+
+    
+<% end %>

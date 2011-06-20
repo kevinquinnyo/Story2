@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @story.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @story.content %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @story.user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_place_story_path(:id => @story.to_param, :place_id => @place.to_param) %> |
+<%= link_to 'Back', place_story_path(:place_id => @place.to_param) %>
