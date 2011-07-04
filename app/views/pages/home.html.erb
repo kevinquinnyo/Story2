@@ -12,8 +12,10 @@
 <% content_for :left do %>
   <h1>A list of stories goes here, in order of user votes</h1>
 
-  <% @stories.each do |story| %>    
-    <%= link_to story.title %></br>
+  <% @places.each do |place| %>
+    <% @stories.each do |story| %>
+      <%= link_to story.title, place_story_path(:place_id => place.id, :id => story.id) %></br>
+    <% end %>
   <% end %>
   
 <% end %>
