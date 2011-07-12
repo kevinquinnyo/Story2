@@ -2,3 +2,23 @@
 height: 300px;
 width: 960px;
 }
+
+.logo {
+letter-spacing: -2px;
+font-size: 36px;
+font-family: helvetica, verdana, arial, sans-serif;
+font-weight:bold;
+line-height:90%;
+}
+
+.colorpink {
+color: #FF0033;
+}
+
+.colorgreen {
+color: #66AA77;
+}
+
+.colorblue { 
+color: #99bbff;
+}
