@@ -1,8 +1,8 @@
 Story2::Application.routes.draw do
 
+  # all stories have a place
   resources :places do
     resources :stories
-    
   end
 
   devise_for :users
