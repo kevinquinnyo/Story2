@@ -1,20 +1,16 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Lat:</b>
-  <%= @place.lat %>
-</p>
-
-<p>
-  <b>Lng:</b>
-  <%= @place.lng %>
-</p>
-
 <p>
   <b>Name:</b>
   <%= @place.name %>
 </p>
 
+<p>
+  <b>Address:</b>
+  <%=@place.address %>
+</p>
+
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Tell your story!', new_place_story_path(:place_id => @place.id) %>
 
 <%= link_to 'Edit', edit_place_path(@place) %> |
 <%= link_to 'Back', places_path %>

@@ -22,3 +22,22 @@ color: #66AA77;
 .colorblue { 
 color: #99bbff;
 }
+
+.newstorybutton {
+  display:                 block;
+  height:                     20px;
+  width:                      80px;
+  text-align:             center;
+  font-size:              24px;
+  font-weight:            bold;
+  line-spacing:           5px;
+  color:                  white;
+  background-color:       #FF9933;
+  padding:                5px; 
+ 
+}
+
+
+a.bigwhitelink:link { color: white; font-weight: bold; font-size: 18px }
+a.bigwhitelink:visited { color: white; font-weight: bold; font-size: 18px}
+a.bigwhitelink:hover { color: white; font-weight: bold; font-size: 18px }

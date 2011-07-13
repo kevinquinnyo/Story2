@@ -14,14 +14,15 @@
 
   <% @places.each do |place| %>
     <% @stories.each do |story| %>
-      <%= link_to story.title, place_story_path(:place_id => place.id, :id => story.id) %></br>
+      <%= link_to story.title, place_story_path(:place_id => place.id, :id => story.id) %><br>
     <% end %>
   <% end %>
   
 <% end %>
 
 <% content_for :right do %>
-  <h1>If you select a story, you read it here.</h1>
-
+  <div class="grid_3 push_3 newstorybutton">
+    <%= link_to "Tell Your Story!", new_place_path, :class => "bigwhitelink" %>
+  </div>
     
 <% end %>
