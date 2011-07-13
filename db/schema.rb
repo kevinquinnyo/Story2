@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110619200016) do
+ActiveRecord::Schema.define(:version => 20110713001711) do
 
   create_table "places", :force => true do |t|
     t.float    "lat"
@@ -24,11 +24,11 @@ ActiveRecord::Schema.define(:version => 20110619200016) do
 
   create_table "stories", :force => true do |t|
     t.string   "title"
-    t.text     "content",    :limit => 1000
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "place_id"
+    t.string   "content",    :limit => nil
   end
 
   create_table "users", :force => true do |t|
