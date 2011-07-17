@@ -1,24 +1,22 @@
 class StoriesController < ApplicationController
   
-  before_filter :set_place
-  before_filter :set_rating
+  before_filter :authenticate_user!, :only => [:rate]
   
-  # GET /places/1/stories
-  # GET /places/1//stories.xml
+  # GET /stories
+  # GET /stories.xml
   def index
-    @stories = @place.stories.all
+    @stories = Story.all
 
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @stories }
     end
   end
-  
-  # GET /places/1//stories/1
-  # GET /places/1//stories/1.xml
+
+  # GET /stories/1
+  # GET /stories/1.xml
   def show
-    @story = @place.stories.find(params[:id])
-    @rating = @place.ratings.find(params[:id])
+    @story = Story.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,10 +24,10 @@ class StoriesController < ApplicationController
     end
   end
 
-  # GET /places/1/stories/new
-  # GET /places/1/stories/new.xml
+  # GET /stories/new
+  # GET /stories/new.xml
   def new
-    @story = @place.stories.new
+    @story = Story.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -37,20 +35,20 @@ class StoriesController < ApplicationController
     end
   end
 
-  # GET /places/1/stories/1/edit
+  # GET /stories/1/edit
   def edit
-    @story = @place.stories.find(params[:id])
+    @story = Story.find(params[:id])
   end
 
-  # POST /places/1/stories
-  # POST /places/1/stories.xml
+  # POST /stories
+  # POST /stories.xml
   def create
-    @story = @place.stories.new(params[:story])
-    @story.user = current_user
+    @story = Story.new(params[:story])
+
     respond_to do |format|
       if @story.save
-        format.html { redirect_to(place_story_url(:place_id => @place.id, :id => @story.id), :notice => 'Story was successfully created.') }
-        format.xml  { render :xml => @story, :status => :created, :location => place_story_url(:place_id => @place.id, :id => @story.id) }
+        format.html { redirect_to(@story, :notice => 'Story was successfully created.') }
+        format.xml  { render :xml => @story, :status => :created, :location => @story }
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @story.errors, :status => :unprocessable_entity }
@@ -58,14 +56,14 @@ class StoriesController < ApplicationController
     end
   end
 
-  # PUT /places/1/stories/1
-  # PUT /places/1/stories/1.xml
+  # PUT /stories/1
+  # PUT /stories/1.xml
   def update
-    @story = @place.stories.find(params[:id])
+    @story = Story.find(params[:id])
 
     respond_to do |format|
       if @story.update_attributes(params[:story])
-        format.html { redirect_to(place_story_url(:place_id => @place.id, :id => @story.id), :notice => 'Story was successfully updated.') }
+        format.html { redirect_to(@story, :notice => 'Story was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -74,26 +72,35 @@ class StoriesController < ApplicationController
     end
   end
 
-  # DELETE /places/1/stories/1
-  # DELETE /places/1/stories/1.xml
+  # DELETE /stories/1
+  # DELETE /stories/1.xml
   def destroy
-    @story = @place.stories.find(params[:id])
+    @story = Story.find(params[:id])
     @story.destroy
 
     respond_to do |format|
-      format.html { redirect_to(place_stories_url(:place_id => @place)) }
+      format.html { redirect_to(stories_url) }
       format.xml  { head :ok }
     end
   end
-  
-  private #################################
 
-  def set_place
-    @place = Place.find(params[:place_id])
-  end
-
-  def set_rating
-    @rating = Rating.find(params[:rating_id])
+  # Rates a story up or down.
+  # 
+  # GET /stories/1/rate?rate=up
+  # GET /stories/1/rate.xml?rate=up
+  def rate
+    @story = Story.find(params[:id])
+    if @story.rate_for_user(params[:rate], current_user)
+      respond_to do |format|
+        format.html { redirect_to(story_url(@story), :notice => 'Story was rated.') }
+        format.xml  { head :ok }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to(story_url(@story), :notice => 'You have already rated.') }
+        format.xml  { head :ok }
+      end
+    end
   end
   
 end

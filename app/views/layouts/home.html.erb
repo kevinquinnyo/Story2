@@ -25,8 +25,12 @@
       <%= yield :top %>
     </div>
 
-    <div class="grid_12">
-      <%= yield %>
+    <div class="grid_6">
+      <%= yield :left %>
+    </div>
+
+    <div id="story_view" class="grid_6">
+      <%= yield :right %>
     </div>
   </div>
 </body>

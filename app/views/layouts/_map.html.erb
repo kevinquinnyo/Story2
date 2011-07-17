@@ -1,60 +1,54 @@
 <% @body_onload = "initialize();" %>
 
 <script type="text/javascript">
+  var map = '';
+  
+  function panMapTo(lat, lng){
+    var pan = new google.maps.LatLng(lat, lng);
+    map.panTo(pan);
+  }
+  
   function initialize() {
     <% if Rails.env.production? %>
       var latlng = new google.maps.LatLng(<%= @current_location.lat %>, <%= @current_location.lng %>);
     <% else %>
       var latlng = new google.maps.LatLng( 33.748, -84.388 );
     <% end %>
-      var myOptions = {
-        zoom: 8,
-        center: latlng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      var map = new google.maps.Map(document.getElementById("map_canvas"),
+    var myOptions = {
+      zoom: 8,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById("map_canvas"),
                                                             myOptions);
-
-//delete this comment later, pasting from swarm, update variables, etc, accordingly
 
     //create empty infowindow outside of loop
     infowindow = new google.maps.InfoWindow();
     //put location markers on map
-    <% @places.each do |place| %>
-      // don't show the marker if we don't have a lat lng or if a bid has already been accepted
-      <% if place.geocoded? %>
-         
-          
-            var request_latlng = new google.maps.LatLng(<%= place.lat %>, <%= place.lng %>);       
+    <% @stories.each do |story| %>
+      // don't show the marker if we don't have a lat lng
+      <% if story.geocoded? %>
+        var request_latlng = new google.maps.LatLng(<%= story.lat %>, <%= story.lng %>);       
 
-            var marker = new google.maps.Marker({ 
-              position: request_latlng, 
-              map: map, 
-              title: "Not sure what to do for title of places yet"
-            });
-            
-            var contentString = 'Not sure what to put in the infobubble yet either.';
-           
-
-             addContentToWindow(marker, contentString);
-      
-     
-     
+        var marker = new google.maps.Marker({ 
+          position: request_latlng, 
+          map: map, 
+          title: "<%= story.title %>"
+        });
         
-        <% end %>
+        var contentString = "<%= story.content %> <br /> <%= escape_javascript(link_to('Read More', story_path(story))) %>";
+                            
+        addContentToWindow(marker, contentString);
+      <% end %>
     <% end %>  
       
-       function addContentToWindow(marker, contentString){
-         google.maps.event.addListener(marker, 'click', function() {
-         infowindow.setContent(contentString);
-         infowindow.open(map, marker);
-         });
-       }
+    function addContentToWindow(marker, contentString){
+      google.maps.event.addListener(marker, 'click', function() {
+        infowindow.setContent(contentString);
+        infowindow.open(map, marker);
+      });
+    }
   }
-
-
-
-
 </script>
 <div id="map_canvas" class="map"></div>
 

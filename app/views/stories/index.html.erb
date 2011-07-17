@@ -4,7 +4,9 @@
   <tr>
     <th>Title</th>
     <th>Content</th>
-    <th>User</th>
+    <th>Address</th>
+    <th>Geocoded</th>
+    <th>Rating</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,13 +16,16 @@
   <tr>
     <td><%= story.title %></td>
     <td><%= story.content %></td>
-    <td><%= story.user_id %></td>
-    <td><%= link_to 'Show', place_story_path(:id => story.to_param, :place_id => @place.to_param) %></td>
-  
+    <td><%= story.address %></td>
+    <td><%= story.geocoded? %></td>
+    <td><%= story.value %></td>
+    <td><%= link_to 'Show', story %></td>
+    <td><%= link_to 'Edit', edit_story_path(story) %></td>
+    <td><%= link_to 'Destroy', story, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Story', new_place_story_path(:place_id => @place.id) %>
+<%= link_to 'New Story', new_story_path %>

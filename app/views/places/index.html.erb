@@ -2,9 +2,8 @@
 
 <table>
   <tr>
-    <th>Lat</th>
-    <th>Lng</th>
     <th>Name</th>
+    <th>Address</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,9 +11,8 @@
 
 <% @places.each do |place| %>
   <tr>
-    <td><%= place.lat %></td>
-    <td><%= place.lng %></td>
     <td><%= place.name %></td>
+    <td><%= place.address %></td>
     <td><%= link_to 'Show', place %></td>
     <td><%= link_to 'Edit', edit_place_path(place) %></td>
     <td><%= link_to 'Destroy', place, :confirm => 'Are you sure?', :method => :delete %></td>

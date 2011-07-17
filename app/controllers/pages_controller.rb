@@ -1,12 +1,13 @@
 class PagesController < ApplicationController
-  
-  
+
+  layout 'home'
+
   def home
     @places = Place.all
     @stories = Story.all
-  
+
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # home.html.erb
       format.xml  { render :xml => @story }
     end
   end
@@ -16,7 +17,5 @@ class PagesController < ApplicationController
 
   def about
   end
-
-  
 
 end

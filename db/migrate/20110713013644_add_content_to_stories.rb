@@ -1,6 +1,6 @@
 class AddContentToStories < ActiveRecord::Migration
   def self.up
-    add_column :stories, :content, :text
+    change_column :stories, :content, :text
   end
 
   def self.down

@@ -1,0 +1,6 @@
+<span class="logo colorblue">INSERT LOGO HERE</span>
+<% if user_signed_in? %>
+  <p>Signed in as <%= current_user.email %>.</p>
+<% else %>
+  <p><%= link_to 'Sign In', new_user_session_path %></p>
+<% end %>

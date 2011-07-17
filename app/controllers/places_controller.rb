@@ -44,7 +44,6 @@ class PlacesController < ApplicationController
 
     respond_to do |format|
       if @place.save
-        #hmmmm format.html { redirect_to @place.stories.new(params[:story])}        
         format.html { redirect_to(@place, :notice => 'Place was successfully created.') }
         format.xml  { render :xml => @place, :status => :created, :location => @place }
       else

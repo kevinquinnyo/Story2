@@ -1,9 +1,11 @@
 Story2::Application.routes.draw do
 
-  # all stories have a place
-  resources :places do
-    resources :stories
+  resources :stories do
+    member do
+      get 'rate'
+    end
   end
+  resources :places
 
   devise_for :users
 

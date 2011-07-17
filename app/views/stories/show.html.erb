@@ -3,13 +3,6 @@
 <p>
   <b>Title:</b>
   <%= @story.title %>
-  <b>Awesome Value:</b>
-  <%= @story.value %>
-  <% if @rating.already_awesomed? %>
-    <p> You like this story! </p>
-  <% else %> 
-    <% button_to "Awesome This" %>
-  <% end %>
 </p>
 
 <p>
@@ -18,10 +11,21 @@
 </p>
 
 <p>
-  <b>User:</b>
-  <%= @story.user_id %>
+  <b>Address:</b>
+  <%= @story.address %>
 </p>
 
+<p>
+  <b>Rating:</b>
+  <%= @story.value %>
+</p>
 
-<%= link_to 'Edit', edit_place_story_path(:id => @story.to_param, :place_id => @place.to_param) %> |
-<%= link_to 'Back', place_stories_path(:place_id => @place.to_param) %>
+<% if user_signed_in? %>
+  <%= link_to 'Rate Up', rate_story_path(@story, :rate => "up") %> <br />
+  <%= link_to 'Rate down', rate_story_path(@story, :rate => "down") %> <br />
+<% else %>
+  <p>Sign in to Rate!</p>
+<% end %>
+
+<%= link_to 'Edit', edit_story_path(@story) %> |
+<%= link_to 'Back', stories_path %>
