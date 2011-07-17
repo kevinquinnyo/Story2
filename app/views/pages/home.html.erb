@@ -3,14 +3,14 @@
 <% end %>
 
 <% content_for :left do %>
-  <h1>A list of stories goes here, in order of user votes</h1>
+  <h1>Best Stories Right Now</h1>
 
   <% @stories.each do |story| %>
     <%= link_to story.title, story_path(story) %>
     <br />
   <% end %>
   
-  <h1>Some Popular Places</h1>
+  <h1>Popular Places</h1>
   
   <% @places.each do |place| %>
     <%= link_to_function place.name, "panMapTo(#{place.lat}, #{place.lng});" %>

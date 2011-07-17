@@ -36,7 +36,7 @@
           title: "<%= story.title %>"
         });
         
-        var contentString = "<%= story.title %> <br /> <%= escape_javascript(link_to('Read More', story_path(story))) %>"; 
+        var contentString = "<%= story.title %> <br /> Awesomeness: <%= story.value %> <br /> <%= escape_javascript(link_to('Read More', story_path(story))) %>"; 
                             
         addContentToWindow(marker, contentString);
       <% end %>
