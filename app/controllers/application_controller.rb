@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery
   
+  helper :all
   before_filter :geokit
 
   geocode_ip_address
@@ -13,5 +15,5 @@ class ApplicationController < ActionController::Base
     session[:return_to] = request.request_uri
   end
 
-  protect_from_forgery
+
 end

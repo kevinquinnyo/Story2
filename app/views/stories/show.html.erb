@@ -3,6 +3,13 @@
 <p>
   <b>Title:</b>
   <%= @story.title %>
+  <b>Awesome Value:</b>
+  <%= @story.value %>
+  <% if @rating.already_awesomed? %>
+    <p> You like this story! </p>
+  <% else %> 
+    <% button_to "Awesome This" %>
+  <% end %>
 </p>
 
 <p>

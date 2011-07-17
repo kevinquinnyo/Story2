@@ -1,6 +1,7 @@
 class StoriesController < ApplicationController
   
   before_filter :set_place
+  before_filter :set_rating
   
   # GET /places/1/stories
   # GET /places/1//stories.xml
@@ -17,6 +18,7 @@ class StoriesController < ApplicationController
   # GET /places/1//stories/1.xml
   def show
     @story = @place.stories.find(params[:id])
+    @rating = @place.ratings.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -88,6 +90,10 @@ class StoriesController < ApplicationController
 
   def set_place
     @place = Place.find(params[:place_id])
+  end
+
+  def set_rating
+    @rating = Rating.find(params[:rating_id])
   end
   
 end

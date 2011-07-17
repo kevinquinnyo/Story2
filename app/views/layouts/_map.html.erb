@@ -2,14 +2,18 @@
 
 <script type="text/javascript">
   function initialize() {
-    var latlng = new google.maps.LatLng(-34.397, 150.644);
-    var myOptions = {
-      zoom: 8,
-      center: latlng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    var map = new google.maps.Map(document.getElementById("map_canvas"),
-        myOptions);
+    <% if Rails.env.production? %>
+      var latlng = new google.maps.LatLng(<%= @current_location.lat %>, <%= @current_location.lng %>);
+    <% else %>
+      var latlng = new google.maps.LatLng( 33.748, -84.388 );
+    <% end %>
+      var myOptions = {
+        zoom: 8,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById("map_canvas"),
+                                                            myOptions);
 
 //delete this comment later, pasting from swarm, update variables, etc, accordingly
 
