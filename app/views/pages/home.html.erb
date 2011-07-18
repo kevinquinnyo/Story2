@@ -6,7 +6,7 @@
   <h1>Best Stories Right Now</h1>
 
   <% @stories.each do |story| %>
-    <%= link_to story.title, story_path(story) %>
+    <b>Awesomeness: <%= story.value %> </b><%= link_to story.title, story_path(story) %> 
     <br />
   <% end %>
   

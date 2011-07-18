@@ -1,7 +1,7 @@
 class StoriesController < ApplicationController
   
-  before_filter :authenticate_user!, :only => [:rate, :edit, :destroy]
-  
+  before_filter :authenticate_user!, :only => [:rate, :edit, :destroy, :new]
+
   # GET /stories
   # GET /stories.xml
   def index

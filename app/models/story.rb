@@ -2,7 +2,7 @@ class Story < ActiveRecord::Base
 
   belongs_to :user
   has_many :ratings
-
+  validates_presence_of :title, :content, :address, :on => :create
   # Geokit
   acts_as_mappable :auto_geocode => true
   
