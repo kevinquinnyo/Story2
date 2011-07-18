@@ -17,11 +17,12 @@
     <td><%= story.title %></td>
     <td><%= story.content %></td>
     <td><%= story.address %></td>
-    <td><%= story.geocoded? %></td>
     <td><%= story.value %></td>
     <td><%= link_to 'Show', story %></td>
-    <td><%= link_to 'Edit', edit_story_path(story) %></td>
-    <td><%= link_to 'Destroy', story, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if current_user %>
+      <td><%= link_to 'Edit', edit_story_path(story) %></td>
+      <td><%= link_to 'Destroy', story, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
