@@ -24,7 +24,7 @@
   <%= link_to 'Rate Up', rate_story_path(@story, :rate => "up") %> <br />
   <%= link_to 'Rate down', rate_story_path(@story, :rate => "down") %> <br />
 <% else %>
-  <p>Sign in to Rate!</p>
+  <p><%= link_to "Sign in to Rate!", new_user_session_path %></p>
 <% end %>
 <% if current_user %>
   <%= link_to 'Edit', edit_story_path(@story) %> |
