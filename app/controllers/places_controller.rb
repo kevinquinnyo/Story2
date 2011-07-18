@@ -2,7 +2,7 @@ class PlacesController < ApplicationController
   # GET /places
   # GET /places.xml
   def index
-    @places = Place(:all, :order => 'value') 
+    @places = Place.all
 
     respond_to do |format|
       format.html # index.html.erb

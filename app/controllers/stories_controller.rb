@@ -5,7 +5,7 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.xml
   def index
-    @stories = Story.all
+    @stories = Story(:all, :order => 'value')
 
     respond_to do |format|
       format.html # index.html.erb
