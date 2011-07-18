@@ -26,6 +26,7 @@
 <% else %>
   <p>Sign in to Rate!</p>
 <% end %>
-
-<%= link_to 'Edit', edit_story_path(@story) %> |
+<% if current_user %>
+  <%= link_to 'Edit', edit_story_path(@story) %> |
+<% end %>
 <%= link_to 'Back', stories_path %>
